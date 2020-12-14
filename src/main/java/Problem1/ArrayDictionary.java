@@ -45,7 +45,39 @@ public class ArrayDictionary implements Dictionary {
 
     @Override
     public void remove(String key) {
-        // homework
+        int hashedKey = hashFunction(key);
+
+        if (entries[hashedKey] == null) //entries doesn't exist, do nothing
+        {
+            return;
+        }
+
+        KVEntry ptr = entries[hashedKey];   //point to the start of the linked list
+        KVEntry prev  = null;
+
+        while (ptr != null && !ptr.key.equals(key)) {
+
+            prev = ptr;
+            ptr = ptr.next;
+
+        }
+
+        if (ptr != null)    //only remove if found
+        {
+            if (prev == null)   // first special case, removing head :-)
+            {
+                entries[hashedKey] = ptr.next;
+            }
+            else     // second special case, removing from center :^)
+            {
+                prev.next = ptr.next;
+            }
+
+        }
+
+
+
+
     }
 
     @Override
